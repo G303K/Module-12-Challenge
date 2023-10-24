@@ -2,22 +2,19 @@ USE company;
 
 -- DROP TABLE IF EXISTS department;
 INSERT INTO department (name)
-VALUES ('Service'),
-    ('Sales'),
+VALUES ('Sales'),
+    ('Engineering'),
     ('Finance');
 
 -- DROP TABLE IF EXISTS role;
 INSERT INTO role (title, salary, department_id)
 VALUES
-    ('Service Technican', '85000', 1),
-    ('Service Advisor', '55000', 1),
-    ('Salesperson', '75000', 2),
-    ('Sales Manager', '125000', 2),
-    ('Porter', '25000', 1),
-    ('Finance Manager', '80000', 3);
+    ('Sales Lead', '100000', 1),
+    ('Salesperson', '80000', 1),
+    ('Software Engineer', '120000', 2);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-    ('John', 'Wickham', 1, null),
-    ('Thomas', 'Wayne', 2, 1),
-    ('Susan', 'White', 3, 1);
+    ('John', 'Doe', 1, null),
+    ('Whitney', 'Kropat', 2, 1),
+    ('Another', 'Person', 3, 1);
