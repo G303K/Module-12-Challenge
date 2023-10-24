@@ -40,7 +40,7 @@ const start = () => {
                 updateEmployee();
                 break;
             default:
-                console.log('Bye!');
+                console.log('Goodbye! See you again soon.');
                 process.exit();
         }
     });
