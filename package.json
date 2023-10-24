@@ -10,6 +10,6 @@
   "author": "Micah Hanchett",
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^9.2.11"
+    "inquirer": "^8.2.4"
   }
 }
