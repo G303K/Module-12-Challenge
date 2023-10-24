@@ -1,0 +1,15 @@
+{
+  "name": "module-12-challenge",
+  "version": "1.0.0",
+  "description": "The challenge homework for module 12",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Micah Hanchett",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^9.2.11"
+  }
+}
