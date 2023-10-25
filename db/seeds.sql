@@ -2,9 +2,9 @@ USE company;
 
 -- DROP TABLE IF EXISTS department;
 INSERT INTO department (name)
-VALUES ('Sales'),
-    ('Engineering'),
-    ('Finance');
+VALUES ('Maintenance'),
+    ('Leasing Office'),
+    ('Operations');
 
 -- DROP TABLE IF EXISTS role;
 INSERT INTO role (title, salary, department_id)
