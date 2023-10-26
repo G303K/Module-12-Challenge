@@ -17,4 +17,4 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
     ('John', 'Dawson', 1, 3),
     ('Whitney', 'Hart', 2, 3),
-    ('Billy', 'Johnson', 3, NULL);
+    ('Billy', 'Johnson', 2, NULL); -- Set manager_id to NULL for Billy Johnson
