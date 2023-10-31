@@ -34,7 +34,7 @@ const start = () => {
         "Add a role",
         "Add an employee",
         "Update employee role",
-        "Quit",
+        "Exit",
       ],
     })
     .then((data) => {
@@ -61,7 +61,7 @@ const start = () => {
           updateEmployeeRole();
           break;
         default:
-          console.log("Bye!");
+          console.log("See you soon!");
           db.end(); // Close the database connection
           process.exit();
       }

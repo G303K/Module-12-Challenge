@@ -1,12 +1,12 @@
 USE company;
 
--- DROP TABLE IF EXISTS department;
+DROP TABLE IF EXISTS department;
 INSERT INTO department (name)
 VALUES ('Maintenance'),
     ('Leasing Office'),
     ('Operations');
 
--- DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS role;
 INSERT INTO role (title, salary, department_id)
 VALUES
     ('Maintenace Tech', '30000', 1),
