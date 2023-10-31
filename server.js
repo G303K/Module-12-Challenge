@@ -15,7 +15,7 @@ db.connect((err) => {
     console.error("Error connecting to the database: " + err.stack);
     return;
   }
-  console.log("Connected to company database");
+  console.log("Connected to the company database");
   start();
 });
 
@@ -37,35 +37,38 @@ const start = () => {
         "Exit",
       ],
     })
-    .then((data) => {
-      switch (data.action) {
-        case "View all departments":
-          viewData("department");
-          break;
-        case "View all roles":
-          viewRoles();
-          break;
-        case "View all employees":
-          viewEmployees();
-          break;
-        case "Add a department":
-          addData("department", "name");
-          break;
-        case "Add a role":
-          addRole();
-          break;
-        case "Add an employee":
-          addEmployee();
-          break;
-        case "Update employee role":
-          updateEmployeeRole();
-          break;
-        default:
-          console.log("See you soon!");
-          db.end(); // Close the database connection
-          process.exit();
-      }
-    });
+    .then(handleUserChoice);
+};
+
+// Handler for user choices
+const handleUserChoice = (data) => {
+  switch (data.action) {
+    case "View all departments":
+      viewData("department");
+      break;
+    case "View all roles":
+      viewRoles();
+      break;
+    case "View all employees":
+      viewEmployees();
+      break;
+    case "Add a department":
+      addData("department", "name");
+      break;
+    case "Add a role":
+      addRole();
+      break;
+    case "Add an employee":
+      addEmployee();
+      break;
+    case "Update employee role":
+      updateEmployeeRole();
+      break;
+    default:
+      console.log("See you soon!");
+      db.end(); // Close the database connection
+      process.exit();
+  }
 };
 
 // View data from a table
@@ -82,32 +85,40 @@ const viewData = (table) => {
 
 // View roles and their departments
 const viewRoles = () => {
-  db.query(
-    "SELECT role.id, title, department.name AS department, salary FROM role JOIN department ON role.department_id = department.id;",
-    (err, res) => {
-      if (err) {
-        console.error(err);
-      }
-      console.log("\n");
-      console.table(res);
-      start();
+  const query = `
+    SELECT role.id, title, department.name AS department, salary
+    FROM role
+    JOIN department ON role.department_id = department.id;
+  `;
+
+  db.query(query, (err, res) => {
+    if (err) {
+      console.error(err);
     }
-  );
+    console.log("\n");
+    console.table(res);
+    start();
+  });
 };
 
 // View employees and their details
 const viewEmployees = () => {
-  db.query(
-    'SELECT T1.id, T1.first_name, T1.last_name, role.title, department.name AS department, role.salary, CONCAT(T2.first_name, " ", T2.last_name) AS manager FROM ((employee T1 LEFT JOIN employee T2 ON T1.manager_id = T2.id) JOIN role ON T1.role_id = role.id) JOIN department ON department_id = department.id;',
-    (err, res) => {
-      if (err) {
-        console.error(err);
-      }
-      console.log("\n");
-      console.table(res);
-      start();
+  const query = `
+    SELECT T1.id, T1.first_name, T1.last_name, role.title, department.name AS department, role.salary, CONCAT(T2.first_name, " ", T2.last_name) AS manager
+    FROM ((employee T1
+    LEFT JOIN employee T2 ON T1.manager_id = T2.id)
+    JOIN role ON T1.role_id = role.id)
+    JOIN department ON department_id = department.id;
+  `;
+
+  db.query(query, (err, res) => {
+    if (err) {
+      console.error(err);
     }
-  );
+    console.log("\n");
+    console.table(res);
+    start();
+  });
 };
 
 // Add data to a table
@@ -119,27 +130,32 @@ const addData = (table, columnName) => {
       message: `Enter the ${columnName}:`,
     })
     .then((answer) => {
-      db.query(
-        `INSERT INTO ${table} (${columnName}) VALUES (?)`,
-        answer.data,
-        (err, res) => {
-          if (err) {
-            console.error(err);
-          }
-          console.log("\nAdded to the database");
-          start();
+      const query = `INSERT INTO ${table} (${columnName}) VALUES (?)`;
+
+      db.query(query, answer.data, (err, res) => {
+        if (err) {
+          console.error(err);
         }
-      );
+        console.log("\nAdded to the database");
+        start();
+      });
     });
 };
 
 // Add a role with department
-const addRole = () => {};
+const addRole = () => {
+  // Implement adding a role
+};
 
 // Add an employee
-const addEmployee = () => {};
+const addEmployee = () => {
+  // Implement adding an employee
+};
 
 // Update an employee's role
-const updateEmployeeRole = () => {};
+const updateEmployeeRole = () => {
+  // Implement updating an employee's role
+};
 
+// Start the application
 start();

@@ -21,6 +21,32 @@ db.connect((err) => {
   mainMenu();
 });
 
+// Display function
+function display(query) {
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing query: " + err);
+    } else {
+      console.log("\n");
+      console.table(results);
+    }
+    mainMenu();
+  });
+}
+
+// Main menu options
+const menuOptions = [
+  "Display Departments",
+  "Display Roles",
+  "Display Employees",
+  "Add Department",
+  "Add Role",
+  "Add Employee",
+  "Update Employee",
+  "Delete Menu",
+  "Quit",
+];
+
 // Main menu function
 function mainMenu() {
   inquirer
@@ -29,23 +55,15 @@ function mainMenu() {
         name: "choice",
         type: "list",
         message: "What do you want to do:",
-        choices: [
-          "Display Departments",
-          "Display Roles",
-          "Display Employees",
-          "Add Department",
-          "Add Role",
-          "Add Employee",
-          "Update Employee",
-          "Delete Menu",
-          "Quit",
-        ],
+        choices: menuOptions,
       },
     ])
     .then((answers) => {
       switch (answers.choice) {
         case "Display Departments":
-          display("SELECT department.id 'ID', department.department 'Department' FROM department;");
+          display(
+            "SELECT department.id 'ID', department.department 'Department' FROM department;"
+          );
           break;
         // Add other cases and their respective functions here
         default:
@@ -55,18 +73,6 @@ function mainMenu() {
     });
 }
 
-// Display function with comments
-function display(query) {
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error("Error executing query: " + err);
-      return;
-    }
-    console.log("\n");
-    console.table(results);
-    mainMenu(); // Return to the main menu
-  });
-}
 // Add other functions with comments here
 
 // Main menu is called when the database connection is established
